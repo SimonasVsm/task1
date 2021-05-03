@@ -1,129 +1,179 @@
-body {
-    font-size: 16px;
-    font-family: 'Roboto', sans-serif;
-    margin: 0.5rem;
-    padding: 0;
+:root {
+  --primary: #06c;
+  --secondary: rgb(137, 170, 202);
+  --success: rgb(24, 201, 24);
+  --failure: rgb(192, 59, 59);
 }
 
-ul, li {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    text-transform: uppercase;
+body {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
 }
 
 .nav {
-
   display: flex;
   justify-content: space-between;
+  background-color: var(--secondary);
+  padding: 1rem;
 }
 
 .nav__logo {
-  flex: 2 ;
+  /* flex: 2; */
 }
 
 .nav__buttons {
   display: flex;
-  justify-content: space-between;
-  flex: 3;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+  flex: 2;
+}
+
+.login {
+  flex: 1 1 100%;
+  text-align: end;
+  margin-bottom: 0.75rem;
 }
 
 .search {
-  width: 5rem;
+  order: 3;
+  flex: 1 1 100%;
+  text-align: center;
+}
+
+#search {
+  padding: 0.5rem 1rem;
 }
 
 .menu {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: space-around;
 }
 
 .breadcrumbs {
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: rgb(95, 81, 81);
-  margin: 0.5rem 0;
+  margin: 0 1rem;
 }
 
 .filter {
+  margin: 0.5rem 1rem;
   padding: 0.5rem 1rem;
   border: 1px solid gray;
-  border-radius: .25rem;
-  margin: 0.5rem 0;
+  border-radius: 0.25rem;
 }
 
- /* CAROUSEL STYLES  */
+/* CAROUSEL STYLES  */
 
- .carousel-container {
+.carousel-container {
   margin: 2rem auto;
   max-width: 100%;
- 
- }
+}
 
- .carousel-container__item {
-   width: 100%;
+.carousel-container__item {
+  width: 100%;
   max-height: 26rem;
   object-fit: cover;
- }
+}
 
- /* Items styles */
+/* Items styles */
 
 .items-container {
-  margin: 0 auto;
+  margin: 1rem;
   display: grid;
-   grid-template-rows: 1fr;
-   grid-template-columns: 1fr;
-   gap: 0.5rem;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
 }
 
 .items-container__item {
- 
-   min-height: 10rem;
-   min-width: 10rem;
-   object-fit: contain;
+  border: 1px solid gray;
+  min-height: 10rem;
+  min-width: 10rem;
+  object-fit: contain;
 }
 
 .item {
-   max-width: 100%;
+  max-width: 100%;
 }
 
-footer {
-  font-family: 'Ubuntu', sans-serif;
+.information {
+  display: flex;
+  justify-content: space-around;
 }
 
-@media(min-width: 688px) {
-    .items-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .carousel-container {
-      margin: 2.5rem auto;
-      max-width: 70%;
-    }
-
-    .nav__logo {
-      flex: 4;
-    }
-
-    .nav__buttons {
-      flex: 2;
-    }
+.footer-container {
+  font-family: "Ubuntu", sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--secondary);
+  padding: 2rem 0;
 }
 
-@media(min-width: 992px) {
-    .items-container {
-        grid-template-columns: repeat(4, 1fr);
-    }
+@media (min-width: 688px) {
+  .items-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .carousel-container {
-    
-      max-width: 60%;
-    }
+  .carousel-container {
+    margin: 2.5rem auto;
+    max-width: 70%;
+  }
 
-    .nav__logo {
-      flex: 7;
-    }
+  .nav__logo {
+    margin-top: 0.5rem;
+    flex: 3;
+  }
 
-    .nav__buttons {
-      flex: 2;
-    }
+  .nav__buttons {
+    flex-wrap: nowrap;
+    display: flex;
+    justify-content: space-around;
+    flex: 2;
+  }
+
+  .login {
+    flex: 1;
+    order: 2;
+    margin-top: 0.5rem;
+  }
+
+  .search {
+    order: 1;
+  }
 }
 
+@media (min-width: 992px) {
+  .items-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .carousel-container {
+    max-width: 60%;
+  }
+
+  .nav__logo {
+    flex: 6;
+  }
+
+  .nav__buttons {
+    flex: 3;
+  }
+}
