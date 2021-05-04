@@ -99,8 +99,6 @@ main {
 	margin-top: 9rem;
 }
 
-/* CAROUSEL STYLES  */
-
 .carousel__container {
 	position: relative;
 	margin: var(--spacing-xl) auto;
