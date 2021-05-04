@@ -1,8 +1,13 @@
 :root {
-  --primary: #06c;
-  --secondary: rgb(137, 170, 202);
-  --success: rgb(24, 201, 24);
-  --failure: rgb(192, 59, 59);
+  --primary: hsl(226, 68%, 50%);
+  --secondary: hsl(225, 25%, 67%);
+  --success: hsl(123, 68%, 44%);
+  --failure: hsl(2, 88%, 44%);
+  --spacing-xs: 0.5rem;
+  --spacing-small: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-large: 1.5rem;
+  --spacing-xl: 2rem;
 }
 
 body {
@@ -27,24 +32,19 @@ a {
   display: flex;
   justify-content: space-between;
   background-color: var(--secondary);
-  padding: 1rem;
-}
-
-.nav__logo {
-  /* flex: 2; */
+  padding: var(--spacing-md);
 }
 
 .nav__buttons {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
   flex: 2;
 }
 
 .login {
   flex: 1 1 100%;
   text-align: end;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--spacing-small);
 }
 
 .search {
@@ -54,7 +54,7 @@ a {
 }
 
 #search {
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-md);
 }
 
 .menu {
@@ -62,7 +62,7 @@ a {
   text-transform: uppercase;
   font-size: 0.75rem;
   font-weight: 700;
-  margin: 1.5rem 0;
+  margin: var(--spacing-large) 0;
   display: flex;
   justify-content: space-around;
 }
@@ -70,12 +70,12 @@ a {
 .breadcrumbs {
   font-size: 0.75rem;
   color: rgb(95, 81, 81);
-  margin: 0 1rem;
+  margin: 0 var(--spacing-md);
 }
 
 .filter {
-  margin: 0.5rem 1rem;
-  padding: 0.5rem 1rem;
+  margin: var(--spacing-xs) var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-md);
   border: 1px solid gray;
   border-radius: 0.25rem;
 }
@@ -83,7 +83,7 @@ a {
 /* CAROUSEL STYLES  */
 
 .carousel-container {
-  margin: 2rem auto;
+  margin: var(--spacing-xl) auto;
   max-width: 100%;
 }
 
@@ -96,11 +96,11 @@ a {
 /* Items styles */
 
 .items-container {
-  margin: 1rem;
+  margin: var(--spacing-md);
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr;
-  gap: 0.5rem;
+  gap: var(--spacing-xs);
 }
 
 .items-container__item {
