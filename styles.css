@@ -109,18 +109,7 @@ main {
 
 .carousel__image {
 	display: none;
-
-	/* position: absolute; */
 }
-
-/* .carousel__image{
-	position: initial;
-} */
-
-/* .carousel__container,
-.carousel__image:nth-child(3) {
-	position: initial;
-} */
 
 .carousel__image--active {
 	display: block;
