@@ -21,7 +21,6 @@ function removeActiveImageClass() {
 }
 
 function addActiveImageClass(item) {
-	console.log(item)
 	item.classList.add('carousel__image--active')
 }
 
