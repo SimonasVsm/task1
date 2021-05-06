@@ -3,15 +3,13 @@ const ui = {
 	buttonPrevious: document.getElementById('left-btn'),
 	carouselImages: document.querySelectorAll('.carousel__image'),
 	carouselIndicatorButtons: document.querySelectorAll('.carousel__indicator'),
-	// get currentImageElement() {
-	//   return document.querySelectorAll(
-	//     '.carousel__indicator'
-	//   )
-	// }
+	// try implementing this
+	get currentImageElement() {
+		return document.querySelectorAll('.carousel__indicator')[currentImage]
+	},
 }
 
-let currentImage = 1
-// const totalImages = ui.carouselImages.length
+let currentImage = 0
 
 function removeActiveNavButtonClass() {
 	ui.carouselIndicatorButtons.forEach((button) => {
@@ -26,6 +24,7 @@ function removeActiveImageClass() {
 }
 
 function addActiveImageClass(item) {
+	console.log(item)
 	item.classList.add('carousel__image--active')
 }
 
@@ -37,15 +36,15 @@ function addActiveNavButtonClass(index) {
 ui.buttonPrevious.addEventListener('click', () => {
 	removeActiveImageClass()
 
-	if (currentImage - 1 < 0) {
+	console.log(currentImage)
+	if (currentImage === -1) {
 		addActiveImageClass(ui.carouselImages[ui.carouselImages.length - 1])
 
-		currentImage = ui.carouselImages.length
-
+		currentImage = ui.carouselImages.length - 1
 		addActiveNavButtonClass(currentImage)
 		currentImage--
 	} else {
-		addActiveImageClass(ui.carouselImages[currentImage - 1])
+		addActiveImageClass(ui.carouselImages[currentImage])
 
 		addActiveNavButtonClass(currentImage)
 		currentImage--
@@ -54,15 +53,15 @@ ui.buttonPrevious.addEventListener('click', () => {
 
 ui.buttonNext.addEventListener('click', () => {
 	removeActiveImageClass()
-	const isLast = currentImage + 1 >= ui.carouselImages.length + 1
+	const isLast = currentImage + 1 >= ui.carouselImages.length
 
 	if (isLast) {
 		addActiveImageClass(ui.carouselImages[ui.carouselImages.length - 1])
 
-		currentImage = 1
+		currentImage = 0
 		addActiveNavButtonClass(currentImage)
 	} else {
-		addActiveImageClass(ui.carouselImages[currentImage - 1])
+		addActiveImageClass(ui.carouselImages[currentImage])
 
 		currentImage++
 		addActiveNavButtonClass(currentImage)
@@ -71,8 +70,7 @@ ui.buttonNext.addEventListener('click', () => {
 
 ui.carouselIndicatorButtons.forEach((button) => {
 	button.addEventListener('click', () => {
-		const imageSelected = ui.carouselImages[button.id - 1]
-
+		const imageSelected = ui.carouselImages[button.id]
 		currentImage = button.id
 
 		removeActiveImageClass()
