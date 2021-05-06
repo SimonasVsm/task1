@@ -3,14 +3,13 @@ const ui = {
 	buttonPrevious: document.getElementById('left-btn'),
 	carouselImages: document.querySelectorAll('.carousel__image'),
 	carouselIndicatorButtons: document.querySelectorAll('.carousel__indicator'),
-	// try implementing this
-	get currentImageElement() {
-		return document.querySelectorAll('.carousel__indicator')[currentImage]
-	},
+	// photos uses id's from 0 and on so I need to adjust to that
+	adjustedAmountOfImages:
+		document.querySelectorAll('.carousel__image').length - 1,
 }
 
 let currentImage = 0
-
+// console.log(ui.currentImageElement)
 function removeActiveNavButtonClass() {
 	ui.carouselIndicatorButtons.forEach((button) => {
 		button.classList.remove('carousel__indicator--active')
@@ -38,9 +37,9 @@ ui.buttonPrevious.addEventListener('click', () => {
 
 	console.log(currentImage)
 	if (currentImage === -1) {
-		addActiveImageClass(ui.carouselImages[ui.carouselImages.length - 1])
+		addActiveImageClass(ui.carouselImages[ui.adjustedAmountOfImages])
 
-		currentImage = ui.carouselImages.length - 1
+		currentImage = ui.adjustedAmountOfImages
 		addActiveNavButtonClass(currentImage)
 		currentImage--
 	} else {
@@ -56,7 +55,7 @@ ui.buttonNext.addEventListener('click', () => {
 	const isLast = currentImage + 1 >= ui.carouselImages.length
 
 	if (isLast) {
-		addActiveImageClass(ui.carouselImages[ui.carouselImages.length - 1])
+		addActiveImageClass(ui.carouselImages[ui.adjustedAmountOfImages])
 
 		currentImage = 0
 		addActiveNavButtonClass(currentImage)
