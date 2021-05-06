@@ -13,13 +13,10 @@ function sumNestedArrayValues(arr) {
 	}
 
 	unnestArr(arr)
-	console.log(finalArr)
 
 	let sum = finalArr.reduce(reducer)
 	return sum
 }
-
-console.log(sumNestedArrayValues([10, 6, [4, 8], 3, [6, 5, [9]]]))
 
 module.exports = {
 	sumNestedArrayValues,

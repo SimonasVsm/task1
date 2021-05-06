@@ -1,6 +1,6 @@
 const { oldMotto, newMotto } = require('./3')
 
-describe('Motto functions block', () => {
+describe('Motto functions', () => {
 	const name = 'Martell'
 	const expected = 'Unbowed, Unbent, Unbroken'
 	const falseMotto = 'Our Blades Are Sharp'

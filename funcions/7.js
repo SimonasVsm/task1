@@ -15,8 +15,6 @@ function sevenAte9(list) {
 	return finalArr.join('')
 }
 
-console.log(sevenAte9('7978777232977797'))
-
 module.exports = {
 	sevenAte9,
 }

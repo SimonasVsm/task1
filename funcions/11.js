@@ -5,8 +5,6 @@ function say(str) {
 	}
 }
 
-console.log(say('Hello,')('it’s me'))
-
 module.exports = {
 	say,
 }

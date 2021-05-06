@@ -19,14 +19,10 @@ function oldMotto(name) {
 	}
 }
 
-console.log(oldMotto('Martell'))
-
 function newMotto(houseName) {
 	const house = houses.find((house) => house.name === houseName)
 	return house.motto
 }
-
-console.log(newMotto('Martell'))
 
 module.exports = {
 	oldMotto,

@@ -13,14 +13,10 @@ function oldWordSearch(w) {
 	return wordIsPresent
 }
 
-console.log(oldWordSearch('suo'))
-
 function newWordSearch(w) {
 	let includes = text.toLowerCase().replace(symbolsToRemove, ' ').includes(w)
 	return includes
 }
-
-console.log(newWordSearch('suo'))
 
 module.exports = {
 	oldWordSearch,

@@ -3,28 +3,19 @@ function oldRange(x, y) {
 	if (typeof x !== 'number' && typeof y !== 'number') {
 		throw new Error('Only numbers can be provided!')
 	} else {
-		for (let i = x; i < y; i++) {
+		for (var i = x; i < y; i++) {
 			oldArray.push(i)
 		}
 	}
 	return oldArray
 }
 
-// var oldArray = []
-// function oldRange(x, y) {
-// 	if (typeof x !== 'number' && typeof y !== 'number') {
-// 		throw new Error('Only numbers can be provided!')
-// 	} else {
-// 		if (x < y) {
-// 			oldArray.push(x)
-// 			return oldRange(x + 1, y)
-// 		} else {
-// 			return oldArray
-// 		}
-// 	}
-// }
-
-console.log(oldRange(1, 6))
+const newRange = (start, stop, step = 1) =>
+	// -1 is to exclude stop parameter
+	Array.from(
+		{ length: (stop - 1 - start) / step + 1 },
+		(_, i) => start + i * step
+	)
 
 module.exports = {
 	newRange,
