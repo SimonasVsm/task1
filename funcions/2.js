@@ -7,8 +7,7 @@ function oldSum(list) {
 }
 
 function newSum(list) {
-	const reducer = (acc, cur) => acc + cur
-	const finalVal = list.reduce(reducer)
+	const finalVal = list.reduce((acc, cur) => acc + cur, 0)
 	return finalVal
 }
 

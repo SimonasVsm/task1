@@ -4,9 +4,6 @@ function add(x) {
 	}
 }
 
-const addFive = add(5)
-
 module.exports = {
 	add,
-	addFive,
 }

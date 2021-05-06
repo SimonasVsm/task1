@@ -7,9 +7,9 @@ function sevenAte9(list) {
 			arrFormList[index + 1] === '7' &&
 			item === '9'
 		) {
-			return
+			return false
 		} else {
-			return item
+			return true
 		}
 	})
 	return finalArr.join('')
