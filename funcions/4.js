@@ -15,14 +15,7 @@ function oldRemoveDuplicates(array) {
 }
 
 function newRemoveDuplicates(array) {
-	const newArray = []
-	array.forEach((item) => {
-		if (!newArray.includes(item)) {
-			newArray.push(item)
-		}
-	})
-
-	return newArray
+	return Array.from(new Set(array))
 }
 
 module.exports = {

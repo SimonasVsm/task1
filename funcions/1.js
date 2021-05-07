@@ -10,12 +10,8 @@ function oldRange(x, y) {
 	return oldArray
 }
 
-const newRange = (start, stop, step = 1) =>
-	// -1 is to exclude stop parameter
-	Array.from(
-		{ length: (stop - 1 - start) / step + 1 },
-		(_, i) => start + i * step
-	)
+const newRange = (start, stop) =>
+	Array.from({ length: stop - start }, (_, i) => start + i)
 
 module.exports = {
 	newRange,
