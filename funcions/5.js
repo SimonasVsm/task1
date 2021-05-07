@@ -14,6 +14,7 @@ function newWordSearch(word, text) {
 	let includes = text
 		.toLowerCase()
 		.replace(symbolsToRemove, ' ')
+		.split(' ')
 		.includes(word)
 	return includes
 }
