@@ -1,0 +1,25 @@
+{
+	"name": "task1",
+	"version": "1.0.0",
+	"description": "",
+	"main": "script.js",
+	"scripts": {
+		"http-server": "http-server --proxy http://localhost:3000",
+		"json-server": "json-server db.json --routes routes.json",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SimonasVsm/task1.git"
+	},
+	"author": "Simonas",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/SimonasVsm/task1/issues"
+	},
+	"homepage": "https://github.com/SimonasVsm/task1#readme",
+	"dependencies": {
+		"http-server": "^0.12.3",
+		"json-server": "^0.16.3"
+	}
+}
