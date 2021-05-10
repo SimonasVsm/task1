@@ -102,8 +102,11 @@ export function carouselNavButtonsEventListeners() {
 		})
 	})
 }
+console.log('script file')
 // will it trigger the right way?
+console.log(Array.from(ui.deleteButtons))
 Array.from(ui.deleteButtons).forEach((button) => {
+	console.log(button)
 	button.addEventListener('click', (event) => {
 		const itemToDeleteId = event.target.dataset.id
 		console.log(event.target.dataset.id) // element to remove
