@@ -16,6 +16,10 @@ function generateShopItem(item) {
     <p class="description">${item.title}</p>
     <p class="price">${item.price}</p>
   </div>
+  <div class="action-buttons">
+    <button class="edit-buttons" data-id="${item.id}">Edit</button>
+    <button class="delete-buttons" data-id="${item.id}">Delete</button>
+  </div>
 </li>
   `
 

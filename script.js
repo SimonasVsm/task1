@@ -10,6 +10,7 @@ const ui = {
 	carouselIndicatorButtons: document.getElementsByClassName(
 		'carousel__indicator'
 	),
+	deleteButtons: document.getElementsByClassName('delete-buttons'),
 }
 
 window.addEventListener('load', (event) => {
@@ -101,3 +102,16 @@ export function carouselNavButtonsEventListeners() {
 		})
 	})
 }
+// will it trigger the right way?
+Array.from(ui.deleteButtons).forEach((button) => {
+	button.addEventListener('click', (event) => {
+		const itemToDeleteId = event.target.dataset.id
+		console.log(event.target.dataset.id) // element to remove
+		if (window.confirm('Delete item?')) {
+			console.log('item was deleted')
+			deleteItem(itemToDeleteId)
+		} else {
+			console.log('item left')
+		}
+	})
+})
