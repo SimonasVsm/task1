@@ -7,8 +7,7 @@ function oldSum(list) {
 }
 
 function newSum(list) {
-	const finalVal = list.reduce((acc, cur) => acc + cur, 0)
-	return finalVal
+	return list.reduce((acc, cur) => acc + cur, 0)
 }
 
 module.exports = {

@@ -27,5 +27,4 @@ function newMotto(houseName) {
 module.exports = {
 	oldMotto,
 	newMotto,
-	houses,
 }

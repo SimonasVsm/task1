@@ -19,10 +19,26 @@ function Calculator(num) {
 	}
 }
 
-var calc = new Calculator(0)
+class Calculator2 {
+	constructor(result) {
+		this.result = result
+	}
 
-amount = calc.add(5).multiply(2).add(20).divide(3).result
+	multiply(num) {
+		this.result *= num
+		return this
+	}
+	add(num) {
+		this.result += num
+		return this
+	}
+	divide(num) {
+		this.result /= num
+		return this
+	}
+}
 
 module.exports = {
 	Calculator,
+	Calculator2,
 }

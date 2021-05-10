@@ -1,9 +1,9 @@
 const { say } = require('./11')
 
 describe('say', () => {
-	const val1 = 'Hello, '
-	const val2 = 'it’s me'
 	it(`return 'Hello, it's me' when called with provided values`, () => {
+		const val1 = 'Hello, '
+		const val2 = 'it’s me'
 		const result = say(val1)(val2)
 		const expected = `Hello, it’s me`
 
