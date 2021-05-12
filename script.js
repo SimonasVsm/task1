@@ -1,21 +1,29 @@
 import { createCarousel } from './generateCarousel.js'
+import { deleteData } from './api/apiCalls.js'
+import { generateModal } from './showModal.js'
 import { createShopItemList } from './generateShopItems.js'
 
 const ui = {
 	buttonNext: document.getElementById('right-btn'),
 	buttonPrevious: document.getElementById('left-btn'),
 	carouselNavButtons: document.getElementById('carouselNav'),
-	shopList: document.getElementById('shopList'),
+	shopItemsList: document.getElementById('shopList'),
+	modal: document.getElementById('exampleModal'),
 	carouselImageContainer: document.getElementsByClassName('carousel__image'),
 	carouselIndicatorButtons: document.getElementsByClassName(
 		'carousel__indicator'
 	),
+	editButtons: document.getElementsByClassName('edit-buttons'),
 	deleteButtons: document.getElementsByClassName('delete-buttons'),
 }
 
-window.addEventListener('load', (event) => {
+window.addEventListener('load', async (event) => {
 	createCarousel()
-	createShopItemList()
+
+	await createShopItemList()
+
+	listenForItemDelete()
+	listenForEdit()
 })
 
 let currentImage = 1
@@ -49,8 +57,8 @@ ui.buttonPrevious.addEventListener('click', () => {
 	const isFirst = currentImage - 1 < 0
 
 	if (isFirst) {
-		let lastCarouselImage = document.querySelectorAll('.carousel__image')
-			.length
+		let lastCarouselImage =
+			document.querySelectorAll('.carousel__image').length
 		console.log(lastCarouselImage)
 
 		// -1 is used because ui.carouselImageContainer starts at 0 not 1
@@ -102,19 +110,40 @@ export function carouselNavButtonsEventListeners() {
 		})
 	})
 }
-console.log('script file')
-// will it trigger the right way?
-console.log(Array.from(ui.deleteButtons))
-Array.from(ui.deleteButtons).forEach((button) => {
-	console.log(button)
-	button.addEventListener('click', (event) => {
-		const itemToDeleteId = event.target.dataset.id
-		console.log(event.target.dataset.id) // element to remove
-		if (window.confirm('Delete item?')) {
-			console.log('item was deleted')
-			deleteItem(itemToDeleteId)
-		} else {
-			console.log('item left')
+
+function listenForItemDelete() {
+	Array.from(ui.deleteButtons).forEach((button) => {
+		button.addEventListener('click', (event) => {
+			const itemToDeleteId = event.target.dataset.id
+
+			if (window.confirm('Delete item?')) {
+				// deleteData('shop', itemToDeleteId)
+				deleteShopItemFromUi(itemToDeleteId)
+			}
+		})
+	})
+}
+
+function deleteShopItemFromUi(itemToDeleteId) {
+	let listItems = Array.from(ui.shopItemsList.getElementsByTagName('li'))
+	listItems.map((item, index) => {
+		if (item.dataset.id === itemToDeleteId) {
+			ui.shopItemsList.removeChild(ui.shopItemsList.children[index])
 		}
 	})
-})
+}
+
+function listenForEdit() {
+	Array.from(ui.editButtons).forEach((button) => {
+		button.addEventListener('click', async (event) => {
+			const modal = document.getElementById('exampleModal')
+
+			if (modal) document.body.removeChild(modal)
+
+			const itemToEditId = event.target.dataset.id
+			const data = await fetch(`/api/shop/${itemToEditId}`)
+			const itemData = await data.json()
+			generateModal(itemData)
+		})
+	})
+}

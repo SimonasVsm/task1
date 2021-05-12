@@ -1,10 +1,11 @@
 import { fetchData } from './getData.js'
 
 function generateShopItem(item) {
+	// pass data not an item generate them all here and append in one go
 	const shopList = document.getElementById('shopList')
 
 	const shopItem = `
-  <li class="items-container__item">
+  <li data-id="${item.id}" class="items-container__item">
   <div class="photo">
     <img
       class="item"
@@ -32,6 +33,7 @@ export async function createShopItemList() {
 	const data = await response.json()
 	try {
 		data.forEach((item) => {
+			// return full HTML and upend it here?
 			generateShopItem(item)
 		})
 	} catch (ex) {
