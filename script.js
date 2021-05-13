@@ -1,20 +1,25 @@
 import { createCarousel } from './generateCarousel.js'
-import { createShopItemList } from './generateShopItems.js'
+import { fetchAndRenderShopItems } from './generateShopItems.js'
 
-const ui = {
+export const ui = {
+	// remake this to fucntion so it could be initialized?
 	buttonNext: document.getElementById('right-btn'),
 	buttonPrevious: document.getElementById('left-btn'),
 	carouselNavButtons: document.getElementById('carouselNav'),
 	shopList: document.getElementById('shopList'),
+	containerFroCarouselImages: document.getElementById('carousel-images'),
 	carouselImageContainer: document.getElementsByClassName('carousel__image'),
 	carouselIndicatorButtons: document.getElementsByClassName(
 		'carousel__indicator'
 	),
+	get navButtons() {
+		return document.getElementsByClassName('carousel__indicator')
+	},
 }
 
 window.addEventListener('load', (event) => {
 	createCarousel()
-	createShopItemList()
+	fetchAndRenderShopItems()
 })
 
 let currentImage = 1
@@ -48,9 +53,8 @@ ui.buttonPrevious.addEventListener('click', () => {
 	const isFirst = currentImage - 1 < 0
 
 	if (isFirst) {
-		let lastCarouselImage = document.querySelectorAll('.carousel__image')
-			.length
-		console.log(lastCarouselImage)
+		let lastCarouselImage =
+			document.querySelectorAll('.carousel__image').length
 
 		// -1 is used because ui.carouselImageContainer starts at 0 not 1
 		addActiveImageClass(ui.carouselImageContainer[lastCarouselImage - 1])
@@ -84,20 +88,3 @@ ui.buttonNext.addEventListener('click', () => {
 		addActiveNavButtonClass(currentImage)
 	}
 })
-
-export function carouselNavButtonsEventListeners() {
-	const navButtons = document.getElementsByClassName('carousel__indicator')
-	Array.from(navButtons).forEach((button) => {
-		button.addEventListener('click', () => {
-			// -1 is used because ui.carouselImageContainer starts at 0 not 1
-			const imageSelected = ui.carouselImageContainer[button.id - 1]
-			currentImage = button.id
-
-			removeActiveImageClass()
-			removeActiveNavButtonClass()
-			button.classList.add('carousel__indicator--active')
-
-			imageSelected.classList.add('carousel__image--active')
-		})
-	})
-}

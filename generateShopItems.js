@@ -1,35 +1,36 @@
 import { fetchData } from './getData.js'
-
-function generateShopItem(item) {
-	const shopList = document.getElementById('shopList')
-
-	const shopItem = `
+import { ui } from './script.js'
+debugger
+function generateShopItem(data) {
+	const shopItemsList = data
+		.map((item) => {
+			return `
   <li class="items-container__item">
-  <div class="photo">
+   <div class="photo">
     <img
       class="item"
       src="${item.url}"
       alt="Shop item"
-    />
-  </div>
+      />
+    </div>
   <div class="information">
     <p class="description">${item.title}</p>
     <p class="price">${item.price}</p>
   </div>
 </li>
   `
+		})
+		.join('')
 
-	shopList.insertAdjacentHTML('beforeend', shopItem)
+	ui.shopList.insertAdjacentHTML('beforeend', shopItemsList)
 }
 
-export async function createShopItemList() {
-	const response = await fetchData('shop')
-
-	const data = await response.json()
+export async function fetchAndRenderShopItems() {
 	try {
-		data.forEach((item) => {
-			generateShopItem(item)
-		})
+		const response = await fetchData('shop')
+
+		const data = await response.json()
+		generateShopItem(data)
 	} catch (ex) {
 		alert(ex)
 	}
