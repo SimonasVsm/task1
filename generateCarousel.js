@@ -1,43 +1,30 @@
-import { fetchData } from './getData.js'
-import { carouselNavButtonsEventListeners } from './script.js'
+import { fetchData } from './api/apiCalls.js'
+import { ui } from './script.js'
+import {
+	generateCarouselNavButtons,
+	carouselNavAddEvListeners,
+} from './generateCarouselNav.js'
 
-function generateCarouselPhotos(item, index) {
-	const prevButton = document.getElementById('left-btn')
-	const elementClass =
-		index === 0
-			? 'carousel__image carousel__image--active fade'
-			: 'carousel__image fade'
+function generateCarouselPhotos(data) {
+	const finalCarousel = data
+		.map((item, index) => {
+			return `
+      <div class="carousel__image fade ${
+			index === 0 ? 'carousel__image--active' : ''
+		}">
+      <p class="hero-text">${item.title}</p>
+      <img
+        src=${item.url}
+        alt="Main image"
+        class="hero-image"
+      />
+      <a class="hero-link" href="#"></a>
+    </div>
+    `
+		})
+		.join('')
 
-	const carouselItemHtml = `
-  <div class="${elementClass}">
-  <p class="hero-text">${item.title}</p>
-  <img
-    src=${item.url}
-    alt="Main image"
-    class="hero-image"
-  />
-  <a class="hero-link" href="#"></a>
-</div>
-`
-
-	prevButton.insertAdjacentHTML('afterend', carouselItemHtml)
-}
-
-function generateCarouselNavButtons(item) {
-	const carouselNavButtonsContainer = document.getElementById('carouselNav')
-	const elementClass =
-		item.id === 0
-			? 'carousel__indicator carousel__indicator--active'
-			: 'carousel__indicator'
-
-	const carouselNavButtons = `
-<button class="${elementClass}" id=${item.id}></button>
-`
-
-	carouselNavButtonsContainer.insertAdjacentHTML(
-		'beforeend',
-		carouselNavButtons
-	)
+	ui.containerFroCarouselImages.insertAdjacentHTML('afterend', finalCarousel)
 }
 
 export async function createCarousel() {
@@ -46,11 +33,9 @@ export async function createCarousel() {
 
 		const data = await response.json()
 
-		data.forEach((item, index) => {
-			generateCarouselPhotos(item, index)
-			generateCarouselNavButtons(item, index)
-		})
-		carouselNavButtonsEventListeners()
+		generateCarouselPhotos(data)
+		generateCarouselNavButtons(data)
+		carouselNavAddEvListeners()
 	} catch (ex) {
 		alert(ex)
 	}

@@ -1,5 +1,5 @@
-export function deleteData(path, id) {
-	return fetch(`api/${path}/${id}`, {
-		method: 'DELETE',
-	})
-}
+// export function deleteData(path, id) {
+// 	return fetch(`api/${path}/${id}`, {
+// 		method: 'DELETE',
+// 	})
+// }

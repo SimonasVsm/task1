@@ -1,11 +1,11 @@
 export function deleteData(path, id) {
-	return fetch(`api/${path}/${id}`, {
+	return fetch(`${path}/${id}`, {
 		method: 'DELETE',
 	})
 }
 
 export function fetchData(path) {
-	return fetch(`/api/${path}`)
+	return fetch(`/${path}`)
 }
 
 export function putData(path, item) {
@@ -23,7 +23,7 @@ export function putData(path, item) {
 }
 
 export function postData(path, item) {
-	return fetch(`/api/${path}`, {
+	return fetch(`/${path}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

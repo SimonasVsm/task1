@@ -1,4 +1,3 @@
-// import { putData } from './putData.js'
 import { generateShopItem } from './generateShopItems.js'
 import { putData, postData } from './api/apiCalls.js'
 import { ui } from './script.js'
@@ -61,11 +60,10 @@ export function handleModal(item, action) {
 			const form = document.querySelector('form')
 			const data = Object.fromEntries(new FormData(form).entries())
 			const createdItem = await postData('shop', data)
-			// create new item
 
 			const makeNewItem = await createdItem.json()
 
-			generateShopItem(makeNewItem)
+			generateShopItem([makeNewItem])
 			destroyModal()
 		})
 	} else {

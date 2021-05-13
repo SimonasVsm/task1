@@ -1,3 +1,3 @@
-export function fetchData(path) {
-	return fetch(`/api/${path}`)
-}
+// export function fetchData(path) {
+// 	return fetch(`/${path}`)
+// }

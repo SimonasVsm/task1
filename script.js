@@ -1,9 +1,10 @@
 import { createCarousel } from './generateCarousel.js'
 import { deleteData } from './api/apiCalls.js'
 import { handleModal } from './showModal.js'
-import { createShopItemList } from './generateShopItems.js'
+import { fetchAndRenderShopItems } from './generateShopItems.js'
 
 export const ui = {
+	currentImage: 1,
 	buttonNext: document.getElementById('right-btn'),
 	buttonPrevious: document.getElementById('left-btn'),
 	carouselNavButtons: document.getElementById('carouselNav'),
@@ -11,7 +12,8 @@ export const ui = {
 	overlay: document.getElementById('overlay'),
 	addItem: document.getElementById('add-item'),
 
-	// modal: document.getElementById('exampleModal'),
+	shopList: document.getElementById('shopList'),
+	containerFroCarouselImages: document.getElementById('carousel-images'),
 	carouselImageContainer: document.getElementsByClassName('carousel__image'),
 	carouselIndicatorButtons: document.getElementsByClassName(
 		'carousel__indicator'
@@ -19,12 +21,10 @@ export const ui = {
 	editButtons: document.getElementsByClassName('edit-buttons'),
 	deleteButtons: document.getElementsByClassName('delete-buttons'),
 
-	// Refactoring
 	get modal() {
 		return document.getElementById('exampleModal')
 	},
 
-	// selectors for modal
 	get modalCloseSignBtn() {
 		return document.getElementById('close')
 	},
@@ -37,26 +37,29 @@ export const ui = {
 	get saveItemEdit() {
 		return document.getElementById('saveEdit')
 	},
+	get navButtons() {
+		return document.getElementsByClassName('carousel__indicator')
+	},
 }
 
 window.addEventListener('load', async (event) => {
 	createCarousel()
 
-	await createShopItemList()
+	await fetchAndRenderShopItems()
 
 	listenForItemDelete()
 	listenForEdit()
 })
 
-let currentImage = 1
+// let currentImage = 1
 
-function removeActiveNavButtonClass() {
+export function removeActiveNavButtonClass() {
 	Array.from(ui.carouselIndicatorButtons).forEach((button) => {
 		button.classList.remove('carousel__indicator--active')
 	})
 }
 
-function removeActiveImageClass() {
+export function removeActiveImageClass() {
 	Array.from(ui.carouselImageContainer).forEach((image) => {
 		image.classList.remove('carousel__image--active')
 	})
@@ -79,69 +82,50 @@ ui.addItem.addEventListener('click', () => {
 		price: '',
 		url: '',
 	}
-	// generateModal(emptyItem, 'add')
 	handleModal(emptyItem, 'add')
 })
 
 ui.buttonPrevious.addEventListener('click', () => {
 	removeActiveImageClass()
 
-	const isFirst = currentImage - 1 < 0
+	const isFirst = ui.currentImage - 1 < 0
 
 	if (isFirst) {
 		let lastCarouselImage =
 			document.querySelectorAll('.carousel__image').length
-		console.log(lastCarouselImage)
 
 		// -1 is used because ui.carouselImageContainer starts at 0 not 1
 		addActiveImageClass(ui.carouselImageContainer[lastCarouselImage - 1])
 
-		currentImage = lastCarouselImage
+		ui.currentImage = lastCarouselImage
 
-		addActiveNavButtonClass(currentImage)
-		currentImage--
+		addActiveNavButtonClass(ui.currentImage)
+		ui.currentImage--
 	} else {
 		// -1 is used because ui.carouselImageContainer starts at 0 not 1
-		addActiveImageClass(ui.carouselImageContainer[currentImage - 1])
+		addActiveImageClass(ui.carouselImageContainer[ui.currentImage - 1])
 
-		addActiveNavButtonClass(currentImage)
-		currentImage--
+		addActiveNavButtonClass(ui.currentImage)
+		ui.currentImage--
 	}
 })
 
 ui.buttonNext.addEventListener('click', () => {
 	removeActiveImageClass()
-	const isLast = currentImage + 1 > ui.carouselImageContainer.length
+	const isLast = ui.currentImage + 1 > ui.carouselImageContainer.length
 
 	if (isLast) {
 		addActiveImageClass(ui.carouselImageContainer[0])
 
-		currentImage = 1
-		addActiveNavButtonClass(currentImage)
+		ui.currentImage = 1
+		addActiveNavButtonClass(ui.currentImage)
 	} else {
-		addActiveImageClass(ui.carouselImageContainer[currentImage])
+		addActiveImageClass(ui.carouselImageContainer[ui.currentImage])
 
-		currentImage++
-		addActiveNavButtonClass(currentImage)
+		ui.currentImage++
+		addActiveNavButtonClass(ui.currentImage)
 	}
 })
-
-export function carouselNavButtonsEventListeners() {
-	const navButtons = document.getElementsByClassName('carousel__indicator')
-	Array.from(navButtons).forEach((button) => {
-		button.addEventListener('click', () => {
-			// -1 is used because ui.carouselImageContainer starts at 0 not 1
-			const imageSelected = ui.carouselImageContainer[button.id - 1]
-			currentImage = button.id
-
-			removeActiveImageClass()
-			removeActiveNavButtonClass()
-			button.classList.add('carousel__indicator--active')
-
-			imageSelected.classList.add('carousel__image--active')
-		})
-	})
-}
 
 function listenForItemDelete() {
 	Array.from(ui.deleteButtons).forEach((button) => {
@@ -159,7 +143,8 @@ function listenForItemDelete() {
 function deleteShopItemFromUi(itemToDeleteId) {
 	let listItems = Array.from(ui.shopItemsList.getElementsByTagName('li'))
 	listItems.map((item, index) => {
-		if (item.dataset.id === itemToDeleteId) {
+		if (item.dataset.id == itemToDeleteId) {
+			console.log(ui.shopItemsList.children[index])
 			ui.shopItemsList.removeChild(ui.shopItemsList.children[index])
 		}
 	})
@@ -171,9 +156,8 @@ function listenForEdit() {
 			if (ui.modal) document.body.removeChild(ui.modal)
 
 			const itemToEditId = event.target.dataset.id
-			const data = await fetch(`/api/shop/${itemToEditId}`)
+			const data = await fetch(`/shop/${itemToEditId}`)
 			const itemData = await data.json()
-			// generateModal(itemData, 'edit')
 			handleModal(itemData, 'edit')
 		})
 	})
