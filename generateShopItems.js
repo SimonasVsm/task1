@@ -1,6 +1,6 @@
 import { fetchData } from './getData.js'
 
-function generateShopItem(item) {
+export function generateShopItem(item) {
 	// pass data not an item generate them all here and append in one go
 	const shopList = document.getElementById('shopList')
 

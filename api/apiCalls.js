@@ -21,3 +21,17 @@ export function putData(path, item) {
 		}),
 	})
 }
+
+export function postData(path, item) {
+	return fetch(`/api/${path}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			title: item.title,
+			price: item.price,
+			url: item.url,
+		}),
+	})
+}

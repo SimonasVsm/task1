@@ -1,20 +1,42 @@
 import { createCarousel } from './generateCarousel.js'
 import { deleteData } from './api/apiCalls.js'
-import { generateModal } from './showModal.js'
+import { handleModal } from './showModal.js'
 import { createShopItemList } from './generateShopItems.js'
 
-const ui = {
+export const ui = {
 	buttonNext: document.getElementById('right-btn'),
 	buttonPrevious: document.getElementById('left-btn'),
 	carouselNavButtons: document.getElementById('carouselNav'),
 	shopItemsList: document.getElementById('shopList'),
-	modal: document.getElementById('exampleModal'),
+	overlay: document.getElementById('overlay'),
+	addItem: document.getElementById('add-item'),
+
+	// modal: document.getElementById('exampleModal'),
 	carouselImageContainer: document.getElementsByClassName('carousel__image'),
 	carouselIndicatorButtons: document.getElementsByClassName(
 		'carousel__indicator'
 	),
 	editButtons: document.getElementsByClassName('edit-buttons'),
 	deleteButtons: document.getElementsByClassName('delete-buttons'),
+
+	// Refactoring
+	get modal() {
+		return document.getElementById('exampleModal')
+	},
+
+	// selectors for modal
+	get modalCloseSignBtn() {
+		return document.getElementById('close')
+	},
+	get modalCloseBtn() {
+		return document.getElementById('closeModal')
+	},
+	get saveNewItem() {
+		return document.getElementById('save-new-item')
+	},
+	get saveItemEdit() {
+		return document.getElementById('saveEdit')
+	},
 }
 
 window.addEventListener('load', async (event) => {
@@ -50,6 +72,16 @@ function addActiveNavButtonClass(index) {
 }
 
 // EVENT LISTENERS
+
+ui.addItem.addEventListener('click', () => {
+	const emptyItem = {
+		title: '',
+		price: '',
+		url: '',
+	}
+	// generateModal(emptyItem, 'add')
+	handleModal(emptyItem, 'add')
+})
 
 ui.buttonPrevious.addEventListener('click', () => {
 	removeActiveImageClass()
@@ -117,7 +149,7 @@ function listenForItemDelete() {
 			const itemToDeleteId = event.target.dataset.id
 
 			if (window.confirm('Delete item?')) {
-				// deleteData('shop', itemToDeleteId)
+				deleteData('shop', itemToDeleteId)
 				deleteShopItemFromUi(itemToDeleteId)
 			}
 		})
@@ -136,14 +168,13 @@ function deleteShopItemFromUi(itemToDeleteId) {
 function listenForEdit() {
 	Array.from(ui.editButtons).forEach((button) => {
 		button.addEventListener('click', async (event) => {
-			const modal = document.getElementById('exampleModal')
-
-			if (modal) document.body.removeChild(modal)
+			if (ui.modal) document.body.removeChild(ui.modal)
 
 			const itemToEditId = event.target.dataset.id
 			const data = await fetch(`/api/shop/${itemToEditId}`)
 			const itemData = await data.json()
-			generateModal(itemData)
+			// generateModal(itemData, 'edit')
+			handleModal(itemData, 'edit')
 		})
 	})
 }

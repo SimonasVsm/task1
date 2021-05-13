@@ -1,83 +1,107 @@
 // import { putData } from './putData.js'
-import { putData } from './api/apiCalls.js'
+import { generateShopItem } from './generateShopItems.js'
+import { putData, postData } from './api/apiCalls.js'
+import { ui } from './script.js'
 
-export function generateModal(item) {
+function generateModal(item, action) {
+	const title =
+		action === 'add'
+			? `<p class="modal-title" id="exampleModalLongTitle">Add new item</p>`
+			: ''
+
+	const actionButton =
+		action === 'add'
+			? ` <button id="save-new-item" type="submit" class="modal-btn">Save New Item</button>`
+			: ` <button id="saveEdit" type="submit" class="modal-btn">Save changes</button>`
+
 	const modalMarkup = `
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="exampleModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      ${title}
         <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" value="${item.title}">
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" value="${item.price}">
-        <label for="url">Url:</label>
-        <input type="text" id="url" name="url" value="${item.url}">
+        <form class="modal-form">
+        <label class="modal-form__item" for="title">Title</label>
+        <input class="modal-form__item" type="text" id="title" name="title" value="${item.title}">
+        <label class="modal-form__item" for="price">Price</label>
+        <input class="modal-form__item" type="number" id="price" name="price" value="${item.price}">
+        <label class="modal-form__item" for="url">Url</label>
+        <input class="modal-form__item" type="text" id="url" name="url" value="${item.url}">
         <form/>
       </div>
       <div class="modal-footer">
-        <button id="closeModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="saveEdit" type="submit" class="btn btn-primary">Save changes</button>
+        <button id="closeModal" type="button" class="modal-btn">Close</button>
+        ${actionButton}
       </div>
     </div>
   </div>
 </div>
   `
+	ui.overlay.classList.add('overlay')
+	ui.overlay.insertAdjacentHTML('afterbegin', modalMarkup)
+	document.body.classList.add('fixed')
 
-	document.body.insertAdjacentHTML('afterbegin', modalMarkup)
-
-	// const modal = document.getElementById('exampleModal')
-	// click outside should close modal
-	// delete vent listeners when closing modal?
-	const closeBtn = document.getElementById('closeModal')
-	closeBtn.addEventListener('click', (event) => {
+	ui.modalCloseBtn.addEventListener('click', (event) => {
 		destroyModal()
 	})
-
-	const closeSign = document.getElementById('close')
-
-	closeSign.addEventListener('click', (event) => {
-		destroyModal()
-	})
-	// add event listeners for buttons?
-	const saveEdit = document.getElementById('saveEdit')
-	saveEdit.addEventListener('click', (event) => {
-		const form = document.querySelector('form')
-		const data = Object.fromEntries(new FormData(form).entries())
-		const updatedData = { ...data, id: item.id }
-
-		putData('shop', updatedData)
-
-		// experiment
-		const shopList = document.getElementById('shopList')
-
-		let listItems = Array.from(shopList.getElementsByTagName('li'))
-		listItems.map((listItem, index) => {
-			if (listItem.dataset.id == item.id) {
-				const itemBeingChanged = shopList.children[index]
-
-				itemBeingChanged.getElementsByClassName('item')[0].src =
-					updatedData.url
-				itemBeingChanged.getElementsByClassName(
-					'description'
-				)[0].innerText = updatedData.title
-				itemBeingChanged.getElementsByClassName('price')[0].innerText =
-					updatedData.price
-			}
-		})
-
+	ui.modalCloseSignBtn.addEventListener('click', () => {
 		destroyModal()
 	})
 }
+export function handleModal(item, action) {
+	generateModal(item, action)
+
+	if (action === 'add') {
+		ui.saveNewItem.addEventListener('click', async (event) => {
+			const form = document.querySelector('form')
+			const data = Object.fromEntries(new FormData(form).entries())
+			const createdItem = await postData('shop', data)
+			// create new item
+
+			const makeNewItem = await createdItem.json()
+
+			generateShopItem(makeNewItem)
+			destroyModal()
+		})
+	} else {
+		ui.saveItemEdit.addEventListener('click', () => {
+			saveItemEventListeners(item)
+		})
+	}
+}
+
+function saveItemEventListeners(item) {
+	const form = document.querySelector('form')
+	const data = Object.fromEntries(new FormData(form).entries())
+	const updatedData = { ...data, id: item.id }
+
+	putData('shop', updatedData)
+
+	let listItems = Array.from(ui.shopItemsList.getElementsByTagName('li'))
+	listItems.map((listItem, index) => {
+		if (listItem.dataset.id == item.id) {
+			const itemBeingChanged = ui.shopItemsList.children[index]
+
+			itemBeingChanged.getElementsByClassName('item')[0].src =
+				updatedData.url
+			itemBeingChanged.getElementsByClassName(
+				'description'
+			)[0].innerText = updatedData.title
+			itemBeingChanged.getElementsByClassName('price')[0].innerText =
+				updatedData.price
+		}
+	})
+
+	destroyModal()
+}
 
 function destroyModal() {
-	const modal = document.getElementById('exampleModal')
-	document.body.removeChild(modal)
+	document.body.classList.remove('fixed')
+	ui.overlay.classList.remove('overlay')
+	ui.overlay.removeChild(ui.modal)
 }
