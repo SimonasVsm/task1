@@ -1,0 +1,23 @@
+{
+	"name": "task1",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SimonasVsm/task1.git"
+	},
+	"author": "Simonas",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/SimonasVsm/task1/issues"
+	},
+	"homepage": "https://github.com/SimonasVsm/task1#readme",
+	"devDependencies": {
+		"@types/jest": "^26.0.23",
+		"jest": "^26.6.3"
+	}
+}
