@@ -96,7 +96,7 @@ a:hover {
 }
 
 main {
-	margin-top: 9rem;
+	margin-top: var(--spacing-xl);
 }
 
 .carousel__container {
@@ -132,7 +132,7 @@ main {
 	right: 1px;
 }
 
-.caoursel__nav {
+.carousel__nav {
 	display: flex;
 	justify-content: center;
 	padding: var(--spacing-xs);

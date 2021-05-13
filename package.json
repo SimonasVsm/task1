@@ -2,8 +2,10 @@
 	"name": "task1",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "script.js",
 	"scripts": {
+		"http-server": "http-server --proxy http://localhost:3000",
+		"json-server": "json-server api/db.json",
 		"test": "jest"
 	},
 	"repository": {
@@ -16,7 +18,11 @@
 		"url": "https://github.com/SimonasVsm/task1/issues"
 	},
 	"homepage": "https://github.com/SimonasVsm/task1#readme",
-	"devDependencies": {
+	"dependencies": {
+		"http-server": "^0.12.3",
+		"json-server": "^0.16.3"
+	},
+  "devDependencies": {
 		"@types/jest": "^26.0.23",
 		"jest": "^26.6.3"
 	}
