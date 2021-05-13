@@ -144,7 +144,6 @@ function deleteShopItemFromUi(itemToDeleteId) {
 	let listItems = Array.from(ui.shopItemsList.getElementsByTagName('li'))
 	listItems.map((item, index) => {
 		if (item.dataset.id == itemToDeleteId) {
-			console.log(ui.shopItemsList.children[index])
 			ui.shopItemsList.removeChild(ui.shopItemsList.children[index])
 		}
 	})
