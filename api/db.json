@@ -61,22 +61,10 @@
       "id": 13
     },
     {
-      "title": "asda",
-      "price": "1231",
-      "url": "https://placeimg.com/640/480/any/212",
-      "id": 14
-    },
-    {
-      "title": "lasld",
+      "title": "weq",
       "price": "100",
-      "url": "https://placeimg.com/640/480/any/212",
+      "url": "https://placeimg.com/640/480/any/16",
       "id": 15
-    },
-    {
-      "title": "hehe",
-      "price": "100",
-      "url": "https://placeimg.com/640/480/any/212",
-      "id": 17
     },
     {
       "title": "Waka waka",
@@ -89,6 +77,12 @@
       "price": "20",
       "url": "https://placeimg.com/640/480/any/4321",
       "id": 19
+    },
+    {
+      "title": "Tst",
+      "price": "12345",
+      "url": "https://placeimg.com/640/480/any/01",
+      "id": 20
     }
   ],
   "carousel": [
