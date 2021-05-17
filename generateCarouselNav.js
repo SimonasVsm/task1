@@ -2,7 +2,7 @@ import {
 	ui,
 	removeActiveImageClass,
 	removeActiveNavButtonClass,
-} from './script.js'
+} from './app.js'
 
 export function generateCarouselNavButtons(data) {
 	const carouselButtons = data

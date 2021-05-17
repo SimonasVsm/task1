@@ -1,88 +1,130 @@
 {
   "shop": [
     {
-      "title": "Title 10",
-      "price": "400",
-      "url": "https://placeimg.com/640/480/any/212",
-      "id": 1
+      "title": "Title 333 111",
+      "price": "8.99",
+      "url": "https://placeimg.com/640/480/any/9",
+      "id": 9
     },
     {
-      "title": "Title 5",
-      "price": "33.5",
-      "url": "https://placeimg.com/640/480/any/4",
-      "id": 4
-    },
-    {
-      "id": 5,
-      "title": "Title 5",
-      "price": 7.99,
-      "url": "https://placeimg.com/640/480/any/5"
-    },
-    {
-      "id": 6,
-      "title": "Title 6",
-      "price": 9.99,
-      "url": "https://placeimg.com/640/480/any/6"
-    },
-    {
-      "id": 7,
-      "title": "Title 7",
-      "price": 5.99,
-      "url": "https://placeimg.com/640/480/any/7"
-    },
-    {
-      "id": 8,
-      "title": "Title 8",
-      "price": 6.99,
-      "url": "https://placeimg.com/640/480/any/8"
-    },
-    {
-      "id": 9,
-      "title": "Title 9",
-      "price": 8.99,
-      "url": "https://placeimg.com/640/480/any/9"
-    },
-    {
-      "title": "Nuotrauka",
-      "price": "250",
-      "url": "https://placeimg.com/640/480/any/11",
-      "id": 11
-    },
-    {
-      "title": "Stalas",
-      "price": "250",
-      "url": "https://placeimg.com/640/480/any/212",
-      "id": 12
-    },
-    {
-      "title": "sigi",
-      "price": "100",
-      "url": "https://placeimg.com/640/480/any/4",
-      "id": 13
-    },
-    {
-      "title": "weq",
-      "price": "100",
-      "url": "https://placeimg.com/640/480/any/16",
-      "id": 15
-    },
-    {
-      "title": "Waka waka",
-      "price": "200",
+      "title": "Waka waka eee",
+      "price": "2002",
       "url": "https://placeimg.com/640/480/any/12221",
       "id": 18
     },
     {
-      "title": "Paskutinis",
-      "price": "20",
-      "url": "https://placeimg.com/640/480/any/4321",
+      "title": "Testinis",
+      "price": "555",
+      "url": "https://placeimg.com/640/480/any/555",
       "id": 19
     },
     {
-      "title": "Tst",
-      "price": "12345",
-      "url": "https://placeimg.com/640/480/any/01",
+      "title": "zzzzz zz",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/4123",
       "id": 20
+    },
+    {
+      "title": "Testinis 55",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/5",
+      "id": 21
+    },
+    {
+      "title": "5wwqe",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/411",
+      "id": 22
+    },
+    {
+      "title": "qwewq",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/12",
+      "id": 23
+    },
+    {
+      "title": "Title 12",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/77",
+      "id": 24
+    },
+    {
+      "title": "Testing edits",
+      "price": "12",
+      "url": "https://placeimg.com/640/480/any/41",
+      "id": 25
+    },
+    {
+      "title": "edit",
+      "price": "12",
+      "url": "https://placeimg.com/640/480/any/412",
+      "id": 26
+    },
+    {
+      "title": "EDIT",
+      "price": "1231",
+      "url": "https://placeimg.com/640/480/any/212",
+      "id": 31
+    },
+    {
+      "title": "ASD",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/77",
+      "id": 33
+    },
+    {
+      "title": "jekp",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/412",
+      "id": 34
+    },
+    {
+      "title": "lastestest",
+      "price": "1233",
+      "url": "https://placeimg.com/640/480/any/773",
+      "id": 37
+    },
+    {
+      "title": "Tv",
+      "price": "250",
+      "url": "https://placeimg.com/640/480/any/tv",
+      "id": 38
+    },
+    {
+      "title": "123",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/123",
+      "id": 39
+    },
+    {
+      "title": "Hap",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/1233",
+      "id": 40
+    },
+    {
+      "title": "tata auto",
+      "price": "12312",
+      "url": "https://placeimg.com/640/480/any/421",
+      "id": 41
+    },
+    {
+      "title": "tata",
+      "price": "123",
+      "url": "https://placeimg.com/640/480/any/4re",
+      "id": 42
+    },
+    {
+      "title": "para",
+      "price": "24",
+      "url": "https://placeimg.com/640/480/any/de",
+      "id": 43
+    },
+    {
+      "title": "asdad",
+      "price": "12312",
+      "url": "https://placeimg.com/640/480/any/212",
+      "id": 44
     }
   ],
   "carousel": [

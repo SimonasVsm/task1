@@ -1,11 +1,10 @@
-import { fetchData } from './api/apiCalls.js'
-import { ui } from './script.js'
+import { ui } from './app.js'
 
 export function generateShopItem(data) {
 	const shopItemsList = data
 		.map((item) => {
 			return `
-  <li data-id="${item.id}" class="items-container__item">
+  <li id="${item.id}" class="items-container__item">
    <div class="photo">
     <img
       class="item"
@@ -31,7 +30,7 @@ export function generateShopItem(data) {
 
 export async function fetchAndRenderShopItems() {
 	try {
-		const response = await fetchData('shop')
+		const response = await fetch('/shop')
 
 		const data = await response.json()
 

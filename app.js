@@ -47,8 +47,13 @@ window.addEventListener('load', async (event) => {
 
 	await fetchAndRenderShopItems()
 
-	listenForItemDelete()
-	listenForEdit()
+	Array.from(ui.deleteButtons).forEach((button) => {
+		addDeleteListener(button, button.dataset.id)
+	})
+
+	Array.from(ui.editButtons).forEach((button) => {
+		addEditListener(button, button.dataset.id)
+	})
 })
 
 // let currentImage = 1
@@ -127,37 +132,26 @@ ui.buttonNext.addEventListener('click', () => {
 	}
 })
 
-function listenForItemDelete() {
-	Array.from(ui.deleteButtons).forEach((button) => {
-		button.addEventListener('click', (event) => {
-			const itemToDeleteId = event.target.dataset.id
-
-			if (window.confirm('Delete item?')) {
-				deleteData('shop', itemToDeleteId)
-				deleteShopItemFromUi(itemToDeleteId)
-			}
-		})
-	})
+function deleteShopItemFromUi(itemToDeleteId) {
+	const elementToDelete = document.getElementById(itemToDeleteId)
+	ui.shopItemsList.removeChild(elementToDelete)
 }
 
-function deleteShopItemFromUi(itemToDeleteId) {
-	let listItems = Array.from(ui.shopItemsList.getElementsByTagName('li'))
-	listItems.map((item, index) => {
-		if (item.dataset.id == itemToDeleteId) {
-			ui.shopItemsList.removeChild(ui.shopItemsList.children[index])
+export function addDeleteListener(item, id) {
+	item.addEventListener('click', () => {
+		if (window.confirm('Delete item?')) {
+			deleteData('shop', id)
+			deleteShopItemFromUi(id)
 		}
 	})
 }
 
-function listenForEdit() {
-	Array.from(ui.editButtons).forEach((button) => {
-		button.addEventListener('click', async (event) => {
-			if (ui.modal) document.body.removeChild(ui.modal)
+export function addEditListener(item, id) {
+	item.addEventListener('click', async () => {
+		if (ui.modal) document.body.removeChild(ui.modal)
 
-			const itemToEditId = event.target.dataset.id
-			const data = await fetch(`/shop/${itemToEditId}`)
-			const itemData = await data.json()
-			handleModal(itemData, 'edit')
-		})
+		const data = await fetch(`/shop/${id}`)
+		const itemData = await data.json()
+		handleModal(itemData, 'edit')
 	})
 }

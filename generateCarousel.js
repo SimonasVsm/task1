@@ -1,5 +1,4 @@
-import { fetchData } from './api/apiCalls.js'
-import { ui } from './script.js'
+import { ui } from './app.js'
 import {
 	generateCarouselNavButtons,
 	carouselNavAddEvListeners,
@@ -29,7 +28,7 @@ function generateCarouselPhotos(data) {
 
 export async function createCarousel() {
 	try {
-		const response = await fetchData('carousel')
+		const response = await fetch('/carousel')
 
 		const data = await response.json()
 

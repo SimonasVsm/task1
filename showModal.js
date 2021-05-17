@@ -1,6 +1,6 @@
 import { generateShopItem } from './generateShopItems.js'
 import { putData, postData } from './api/apiCalls.js'
-import { ui } from './script.js'
+import { ui, addEditListener, addDeleteListener } from './app.js'
 
 function generateModal(item, action) {
 	const title =
@@ -56,14 +56,23 @@ export function handleModal(item, action) {
 	generateModal(item, action)
 
 	if (action === 'add') {
-		ui.saveNewItem.addEventListener('click', async (event) => {
-			const form = document.querySelector('form')
-			const data = Object.fromEntries(new FormData(form).entries())
-			const createdItem = await postData('shop', data)
+		ui.saveNewItem.addEventListener('click', async () => {
+			const data = getInputsData()
+			const createdItem = await postData('shop', JSON.stringify(data))
 
-			const makeNewItem = await createdItem.json()
+			const newItemData = await createdItem.json()
+			generateShopItem([newItemData])
 
-			generateShopItem([makeNewItem])
+			const newItemEditBtn = Array.from(ui.editButtons).find(
+				(button) => button.dataset.id == newItemData.id
+			)
+
+			const newDeleteBtn = Array.from(ui.deleteButtons).find(
+				(button) => button.dataset.id == newItemData.id
+			)
+
+			addEditListener(newItemEditBtn, newItemEditBtn.dataset.id)
+			addDeleteListener(newDeleteBtn, newDeleteBtn.dataset.id)
 			destroyModal()
 		})
 	} else {
@@ -73,33 +82,36 @@ export function handleModal(item, action) {
 	}
 }
 
-function saveItemEventListeners(item) {
-	const form = document.querySelector('form')
-	const data = Object.fromEntries(new FormData(form).entries())
+async function saveItemEventListeners(item) {
+	const data = getInputsData()
 	const updatedData = { ...data, id: item.id }
 
-	putData('shop', updatedData)
+	const backEndUpdated = await putData(
+		`shop/${updatedData.id}`,
+		JSON.stringify(updatedData)
+	)
 
-	let listItems = Array.from(ui.shopItemsList.getElementsByTagName('li'))
-	listItems.map((listItem, index) => {
-		if (listItem.dataset.id == item.id) {
-			const itemBeingChanged = ui.shopItemsList.children[index]
+	if (backEndUpdated) {
+		const ItemBeingEdited = document.getElementById(item.id)
 
-			itemBeingChanged.getElementsByClassName('item')[0].src =
-				updatedData.url
-			itemBeingChanged.getElementsByClassName(
-				'description'
-			)[0].innerText = updatedData.title
-			itemBeingChanged.getElementsByClassName('price')[0].innerText =
-				updatedData.price
-		}
-	})
-
-	destroyModal()
+		ItemBeingEdited.getElementsByClassName('item')[0].src = updatedData.url
+		ItemBeingEdited.getElementsByClassName('description')[0].innerText =
+			updatedData.title
+		ItemBeingEdited.getElementsByClassName('price')[0].innerText =
+			updatedData.price
+		destroyModal()
+	} else {
+		alert('Something went wrong. Try again.')
+	}
 }
 
 function destroyModal() {
 	document.body.classList.remove('fixed')
 	ui.overlay.classList.remove('overlay')
 	ui.overlay.removeChild(ui.modal)
+}
+
+function getInputsData() {
+	const form = document.querySelector('form')
+	return Object.fromEntries(new FormData(form).entries())
 }
