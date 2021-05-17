@@ -1,7 +1,10 @@
-import { ui } from './script.js'
+import {
+	ui,
+	removeActiveImageClass,
+	removeActiveNavButtonClass,
+} from './app.js'
 
 export function generateCarouselNavButtons(data) {
-	console.log(ui)
 	const carouselButtons = data
 		.map((item, index) => {
 			const buttonClass =
@@ -23,7 +26,7 @@ export function carouselNavAddEvListeners() {
 		button.addEventListener('click', () => {
 			// -1 is used because ui.carouselImageContainer starts at 0 not 1
 			const imageSelected = ui.carouselImageContainer[button.id - 1]
-			currentImage = button.id
+			ui.currentImage = button.id
 
 			removeActiveImageClass()
 			removeActiveNavButtonClass()

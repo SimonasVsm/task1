@@ -71,6 +71,63 @@ a:hover {
 	padding: var(--spacing-xs) var(--spacing-md);
 }
 
+/* MODAL */
+
+.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	overflow-y: hidden;
+	z-index: 100;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-content {
+	height: 275px;
+	padding: var(--spacing-md);
+	width: 300px;
+	background: hsl(0deg 2% 65%);
+	display: flex;
+	border-radius: 2rem;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.modal-title {
+	margin: 0;
+	font-size: inherit;
+}
+
+.modal-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.modal-form__item {
+	padding: var(--spacing-xs);
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: space-around;
+}
+
+.modal-btn {
+	padding: var(--spacing-xs);
+}
+
+.fixed {
+	position: fixed;
+}
+
 .menu {
 	font-family: 'Ubuntu', sans-serif;
 	background-color: var(--white);

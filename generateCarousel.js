@@ -1,10 +1,8 @@
-import { fetchData } from './getData.js'
-import { ui } from './script.js'
+import { ui } from './app.js'
 import {
 	generateCarouselNavButtons,
 	carouselNavAddEvListeners,
 } from './generateCarouselNav.js'
-// import { carouselNavAddEvListeners, ui } from './script.js'
 
 function generateCarouselPhotos(data) {
 	const finalCarousel = data
@@ -30,7 +28,7 @@ function generateCarouselPhotos(data) {
 
 export async function createCarousel() {
 	try {
-		const response = await fetchData('carousel')
+		const response = await fetch('/carousel')
 
 		const data = await response.json()
 

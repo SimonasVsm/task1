@@ -2,7 +2,7 @@
 	"name": "task1",
 	"version": "1.0.0",
 	"description": "",
-	"main": "script.js",
+	"main": "app.js",
 	"scripts": {
 		"http-server": "http-server --proxy http://localhost:3000",
 		"json-server": "json-server api/db.json",
@@ -22,7 +22,7 @@
 		"http-server": "^0.12.3",
 		"json-server": "^0.16.3"
 	},
-  "devDependencies": {
+	"devDependencies": {
 		"@types/jest": "^26.0.23",
 		"jest": "^26.6.3"
 	}
